@@ -51,19 +51,34 @@ The workflow is organized into 7 notebooks (run in order):
 7. **07-AML.ipynb**  
    AML visual summaries and trend plots based on the AQI and violation outputs.
 
-## Expected folders (recommended)
+## Recommended local folders
 The notebooks use relative paths. A typical setup is:
 
-- `./01-dados-qualar/medicoes/` *(raw QUALAR station/year files — not tracked)*
-- `./02-dados-qualar-integrados/` *(generated CSVs)*
-- `./03-dados-qualar-longo-corrigido/` *(tidy/clean datasets)*
-- `./04-dados-qualar-longo-AML/` *(AML datasets + AQI/violations outputs)*
+- `./01-dados-qualar/medicoes/` (raw QUALAR station/year files — not tracked)
+- `./02-dados-qualar-integrados/` (generated CSVs)
+- `./03-dados-qualar-longo-corrigido/` (tidy/clean datasets)
+- `./04-dados-qualar-longo-AML/` (AML datasets + AQI/violations outputs)
 
-> Tip: add the data folders to `.gitignore` so you don’t accidentally upload raw datasets.
+Tip: add the data folders to `.gitignore` so you don’t accidentally upload raw datasets.
 
 ## Setup
 Recommended: Python 3.10+
 
 Install dependencies:
-```bash
-pip install pandas numpy matplotlib openpyxl
+
+    pip install pandas numpy matplotlib openpyxl
+
+## How to run
+1) Place raw QUALAR files under `./01-dados-qualar/medicoes/`  
+2) Run notebooks **01 → 07** in order.
+
+## Notes
+- AQI is computed using:
+  - **PM10 / PM2.5**: daily mean
+  - **SO2 / NO2 / O3**: daily maximum
+  - Overall AQI: maximum across pollutants per day
+- Validity criteria follow the project specification (≥75% hourly measurements per day; ≥90% valid days per year; ≥2 valid years).
+
+## Credits
+- Data source: **QUALAR (APA)**
+- Project specification provided in the PCED 2023/2024 course materials.
